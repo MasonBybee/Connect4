@@ -5,41 +5,47 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
-var currPlayer = 1; // active player: 1 or 2
-var board = []; // array of rows, each row is array of cells  (board[y][x])
-
+let currPlayer = 1; // active player: 1 or 2
+const board = []; // array of rows, each row is array of cells  (board[y][x])
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  for (let i = 0; i < HEIGHT; i++){
+    const row = []
+    for (let i = 0; i < WIDTH; i++){
+      row.push(null)
+    }
+    board.push(row)
+  }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
-  // TODO: add comment for this code
-  var top = document.createElement("tr");
+const htmlBoard = document.querySelector('#board')
+  // Create top tr element and set id as columntop
+  const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
-
-  for (var x = 0; x < WIDTH; x++) {
-    var headCell = document.createElement("td");
+// Creates tds for column top tr 
+  for (let x = 0; x < WIDTH; x++) {
+    const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
-  for (var y = 0; y < HEIGHT; y++) {
+
+  for (let y = 0; y < HEIGHT; y++) {
+    // create new row for every height 
     const row = document.createElement("tr");
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
+      // add Width # of tds for every row created
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
@@ -51,30 +57,39 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  let y = 5
+  while (y >= 0) {
+    if (board[y][x] !== 1 && board[y][x] !== 2) {
+      return y
+    }
+    y--
+  }
+  return null
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  const div = document.createElement('div')
+  div.classList.add(`player${currPlayer}`)
+  document.getElementById(`${y}-${x}`).append(div)
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  // Mason try and use modal box   <=================================================================
+  setTimeout(() => alert(msg),250)
 }
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  const x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  const y = findSpotForCol(x);
   if (y === null) {
     return;
   }
@@ -82,6 +97,7 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
+  board[y][x] = currPlayer
 
   // check for win
   if (checkForWin()) {
@@ -89,12 +105,13 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
-
+  // TODO: check if all cells in board are filled; if so call, call endGame <=====================================
+  const allCells = board.every((val,i) => {
+   return board[i].every((value) => value !== null)
+  })
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  currPlayer = currPlayer === 1 ? 2 : 1
 }
-
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 function checkForWin() {
@@ -113,8 +130,8 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
-
+  // TODO: read and understand this code. Add comments to help you. <=======================================
+  // check every cell 
   for (var y = 0; y < HEIGHT; y++) {
     for (var x = 0; x < WIDTH; x++) {
       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
