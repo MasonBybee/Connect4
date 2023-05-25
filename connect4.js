@@ -27,8 +27,8 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  
-  const htmlBoard = document.querySelector('#board')
+
+  let htmlBoard = document.querySelector('#board')
   
   // Create top tr element and set id as columntop
   const top = document.createElement("tr");
