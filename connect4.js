@@ -75,7 +75,6 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // Mason try and use modal box   <=================================================================
   setTimeout(() => alert(msg),750)
 }
 
@@ -95,14 +94,17 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   placeInTable(y, x);
   board[y][x] = currPlayer
 
   // check for win
   if (checkForWin()) {
+    let playerColor = ""
     gameOver = true
-    return endGame(`Player ${currPlayer} won!`);
+    if (currPlayer === 1) {
+      playerColor = 'Red'
+    } else {playerColor = 'Blue'}
+    return endGame(`${playerColor} player won!`);
   }
 
   // check for tie
@@ -163,6 +165,7 @@ const resetGame = () => {
   makeHtmlBoard();
   gameOver = false
 }
+
 newGameForm.addEventListener('submit', (e) => {
   e.preventDefault();
   newGameForm.firstElementChild.textContent = "New Game";
