@@ -6,12 +6,37 @@ body {
   width: 50px;
   height: 50px;
   border: solid 1px #666;
-  position: relative;
   margin-left: auto;
   margin-right: auto;
 }
 
+#newGame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header {
+  text-align: center;
+  color: lightskyblue;
+  margin: 0;
+}
+h1 {
+  padding-top: 10px;
+}
+h3 {
+  padding: 3px;
+}
+h4 {
+  padding-top: 20px;
+}
 
+#board {
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top:20%;
+  overflow: hidden;
+}
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
@@ -22,12 +47,25 @@ body {
   background-color: gold;
 }
 
+@keyframes piece {
+  from {
+    margin-top: -400px ;
+  }
+
+  to {
+    margin-top: 0px ;
+  }
+}
+
 .player1 {
   background-image: url(./assets/CGRed.png);
   width: 48px;
   height: 48px;
   margin: 1px;
   border-radius: 24px;
+  animation-name: piece;
+  animation-duration: .3s ;
+  animation-timing-function: ease-in;
 }
 
 .player2 {
@@ -36,5 +74,18 @@ body {
   height: 48px;
   margin: 1px;
   border-radius: 24px;
+  animation-name: piece;
+  animation-duration: .3s ;
+  animation-timing-function: ease-in;
 }
 
+@keyframes fall-out {
+  0% {
+    transform: translateY(0);
+
+  }
+  100% {
+    transform: translateY(1000px);
+
+  }
+}
