@@ -34,7 +34,7 @@ h4 {
   left: 50%;
   transform: translateX(-50%);
   position: absolute;
-  top:20%;
+  top: 20%;
   overflow: hidden;
 }
 /* column-top is table row of clickable areas for each column */
@@ -49,11 +49,11 @@ h4 {
 
 @keyframes piece {
   from {
-    margin-top: -400px ;
+    margin-top: -400px;
   }
 
   to {
-    margin-top: 0px ;
+    margin-top: 0px;
   }
 }
 
@@ -64,7 +64,7 @@ h4 {
   margin: 1px;
   border-radius: 24px;
   animation-name: piece;
-  animation-duration: .3s ;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in;
 }
 
@@ -75,17 +75,26 @@ h4 {
   margin: 1px;
   border-radius: 24px;
   animation-name: piece;
-  animation-duration: .3s ;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in;
 }
 
 @keyframes fall-out {
   0% {
     transform: translateY(0);
-
   }
   100% {
     transform: translateY(1000px);
-
   }
+}
+
+.portfolio-link {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 150px;
+}
+
+.portfolio-link a {
+  color: lightskyblue;
 }
