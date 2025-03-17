@@ -58,7 +58,7 @@ h4 {
 }
 
 .player1 {
-  background-image: url(./assets/CGRed.png);
+  background-image: url(./assets/RedChip.png);
   width: 48px;
   height: 48px;
   margin: 1px;
@@ -69,7 +69,7 @@ h4 {
 }
 
 .player2 {
-  background-image: url(./assets/MBBlue.png);
+  background-image: url(./assets/BlueChip.png);
   width: 48px;
   height: 48px;
   margin: 1px;
